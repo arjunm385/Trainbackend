@@ -19,7 +19,7 @@ pipeline {
         stage('Build Docker image'){
             steps {
               
-                sh 'docker build -t  9963286630/revature-railways-backend .'
+                sh 'docker build -t  arjunm385/revature-railways-backend .'
             }
         }
 
@@ -27,7 +27,7 @@ pipeline {
             
             steps {
                     withCredentials([string(credentialsId: 'DockerId', variable: 'Dockerpwd')]) {
-                    sh "docker login -u 9963286630 -p ${Dockerpwd}"
+                    sh "docker login -u arjunm385 -p ${Dockerpwd}"
                 }
                 
             }                
@@ -35,14 +35,14 @@ pipeline {
 
         stage('Docker Push'){
             steps {
-                sh 'docker push 9963286630/revature-railways-backend'
+                sh 'docker push arjunm385/revature-railways-backend'
             }
         }
         
         stage('Docker deploy'){
             steps {
-               sh 'docker rm -f 9963286630/revature-railways-backend'
-                sh 'docker run -itd -p  9090:9848 9963286630/revature-railways-backend'
+               sh 'docker rm -f arjunm385/revature-railways-backend'
+                sh 'docker run -itd -p  8088:9848 arjunm385/revature-railways-backend'
             }
         }
 
